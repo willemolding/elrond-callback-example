@@ -1,0 +1,17 @@
+[[bin]]
+name = "proxy-test"
+path = "src/lib.rs"
+
+[package]
+name = "proxy-test"
+version = "0.0.1"
+authors = [ "you",]
+edition = "2018"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+elrond-wasm = "0.5.3"
+elrond-wasm-node = "0.5.3"
+elrond-wasm-derive = "0.5.3"
