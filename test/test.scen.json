@@ -6,37 +6,52 @@
             "accounts": {
                 "''node_address__________________s1": {
                     "nonce": "0",
-                    "balance": "1000",
+                    "balance": "0",
                     "storage": {},
                     "code": ""
+                },
+                "''alice_________________________s1": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "storage": {},
+                    "code": "file:../output/proxy-test.wasm"
+                },
+                "''bob___________________________s1": {
+                    "nonce": "0",
+                    "balance": "0",
+                    "storage": {},
+                    "code": "file:../output/proxy-test.wasm"
                 }
-            },
-            "newAddresses": [
-                {
-                    "creatorAddress": "''node_address__________________s1",
-                    "creatorNonce": "0",
-                    "newAddress": "''contract_address______________s1"
-                }
-            ]
+            }
         },
         {
-            "step": "scDeploy",
-            "txId": "deploy-1",
-            "tx": {
-                "from": "''node_address__________________s1",
-                "value": "0",
-                "contractCode": "file:../output/proxy-test.wasm",
-                "arguments": [],
-                "gasLimit": "1,000,000",
-                "gasPrice": "0"
-            },
-            "expect": {
-                "out": [],
-                "status": "",
-                "logs": [],
-                "gas": "*",
-                "refund": "*"
+          "step": "scCall",
+          "txId": "make-call-1",
+          "tx": {
+              "from": "''node_address__________________s1",
+              "to": "''alice_________________________s1",
+              "value": "0",
+              "function": "trigger_remote_call",
+              "arguments": [
+                "''bob___________________________s1",
+                "123"
+            ],
+              "gasLimit": "100,000,000",
+              "gasPrice": "0"
+          },
+          "expect": {
+          "status": "0",
+          "gas": "*",
+          "refund": "*",
+          "logs": [
+            {
+                "address": "''bob___________________________s1",
+                "identifier": "0x0000000000000000000000000000000000000000000000000000000000000001",
+                "topics": [],
+                "data": "123" 
             }
+          ]
+          }
         }
     ]
 }
